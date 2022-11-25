@@ -31,6 +31,16 @@ function postVideo(req, res) {
     })
 }
 
+function postManyVideo(req, res) {
+    const videos = req.body;
+
+    Video.insertMany(req.body, (err) => {
+        if (err) return res.status(500).send({ message: `Error saving videos ${err}.`});
+
+        return res.status(200).send({ message: 'videos added successfully.' });
+    })
+}
+
 function updateVideo(req, res) {
     const newVideo = req.body;
     const { id: videoId } = req.params;
